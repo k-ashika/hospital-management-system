@@ -16,7 +16,7 @@ export class Dashboard implements OnInit {
   totalAppointments: number = 0;
   completedToday: number = 0;
 
-  private base = 'http://localhost:8080/api';
+   private base = 'https://hms-backend-hr36.onrender.com/api';
 
   constructor(
     private router: Router,

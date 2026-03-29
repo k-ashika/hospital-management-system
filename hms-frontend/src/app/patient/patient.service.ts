@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 @Injectable({ providedIn: 'root' })
 export class PatientService {
 
-  private apiUrl = 'http://localhost:8080/api/patients';
+  private apiUrl = 'https://hms-backend-hr36.onrender.com/api/patients';
 
   constructor(private http: HttpClient) {}
 

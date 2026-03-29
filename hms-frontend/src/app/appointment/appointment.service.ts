@@ -4,10 +4,9 @@ import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class AppointmentService {
-  private apiUrl = 'http://localhost:8080/api/appointments';
-  private doctorsUrl = 'http://localhost:8080/api/doctors';
-  private patientsUrl = 'http://localhost:8080/api/patients';
-
+  private apiUrl = 'https://hms-backend-hr36.onrender.com/api/appointments';
+private doctorsUrl = 'https://hms-backend-hr36.onrender.com/api/doctors';
+private patientsUrl = 'https://hms-backend-hr36.onrender.com/api/patients';
   constructor(private http: HttpClient) {}
 
   getAllAppointments(page: number = 0, size: number = 5): Observable<any> {

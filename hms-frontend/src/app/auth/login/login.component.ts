@@ -22,7 +22,7 @@ export class Login {
   login() {
     this.loading = true;
     this.errorMsg = '';
-    this.http.post<any>('http://localhost:8080/api/auth/login', {
+    this.http.post<any>('https://hms-backend-hr36.onrender.com/api/auth/login', {
       username: this.username,
       password: this.password
     }).subscribe({

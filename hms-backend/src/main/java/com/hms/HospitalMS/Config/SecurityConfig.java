@@ -34,7 +34,7 @@ public class SecurityConfig {
     }
     @Bean public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration c = new CorsConfiguration();
-        c.setAllowedOrigins(List.of("http://localhost:4200"));
+       c.setAllowedOrigins(List.of("http://localhost:4200", "https://hospital-m-system.netlify.app"));
         c.setAllowedMethods(List.of("GET","POST","PUT","DELETE","OPTIONS"));
         c.setAllowedHeaders(List.of("*"));
         c.setAllowCredentials(true);

@@ -7,8 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class AuthService {
 
-  private baseUrl = 'http://localhost:8080/api/auth';
-
+private baseUrl = 'https://hms-backend-hr36.onrender.com/api/auth';
   constructor(private http: HttpClient) {}
 
   login(credentials: { username: string; password: string }): Observable<any> {
