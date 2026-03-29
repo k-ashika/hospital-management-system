@@ -11,8 +11,15 @@ A full-stack **Hospital Management System** built with **Angular** (frontend) an
 
 ## 📸 Screenshots
 
-> Add screenshots of your Dashboard, Patient, Doctor and Appointment pages here
-
+![Login](screenshots/login.png)
+![Dashboard](screenshots/admin-dashboard.png)
+![Patients](screenshots/patients-page-1.png)
+![Patients](screenshots/patients-page-2.png)
+![Doctors](screenshots/doctor-page-1.png)
+![Doctors](screenshots/doctor-page-2.png)
+![Doctors](screenshots/doctor-page-3.png)
+![Appointments](screenshots/appointment-page-1.png)
+![Appointments](screenshots/appointment-page-2.png)
 ---
 
 ## ✨ Features
