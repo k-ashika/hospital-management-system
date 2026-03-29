@@ -33,15 +33,14 @@ public class SecurityConfig {
         return http.getSharedObject(AuthenticationManagerBuilder.class).authenticationProvider(authProvider()).build();
     }
     @Bean public CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration c = new CorsConfiguration();
-       c.setAllowedOrigins(List.of("http://localhost:4200", "https://hospital-m-system.netlify.app"));
-        c.setAllowedMethods(List.of("GET","POST","PUT","DELETE","OPTIONS"));
-        c.setAllowedHeaders(List.of("*"));
-        c.setAllowCredentials(true);
-        UrlBasedCorsConfigurationSource s = new UrlBasedCorsConfigurationSource();
-        s.registerCorsConfiguration("/**", c);
-        return s;
-    }
+    CorsConfiguration c = new CorsConfiguration();
+    c.setAllowedOriginPatterns(List.of("*"));
+    c.setAllowedMethods(List.of("GET","POST","PUT","DELETE","OPTIONS"));
+    c.setAllowedHeaders(List.of("*"));
+    c.setAllowCredentials(true);
+    UrlBasedCorsConfigurationSource s = new UrlBasedCorsConfigurationSource();
+    s.registerCorsConfiguration("/**", c);
+    return s;
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
