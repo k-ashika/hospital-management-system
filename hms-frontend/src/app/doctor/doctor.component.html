@@ -1,0 +1,129 @@
+<!-- SIDEBAR -->
+<div class="sidebar">
+  <div class="sidebar-logo">
+    <span class="logo-icon">🏥</span>
+    <h1>Hospital MS</h1>
+    <p>Admin Panel</p>
+  </div>
+  <nav class="sidebar-nav">
+    <span class="nav-label">Main Menu</span>
+    <a class="nav-link" routerLink="/dashboard"><span class="nav-icon">📊</span> Dashboard</a>
+    <a class="nav-link" routerLink="/patients"><span class="nav-icon">👤</span> Patients</a>
+    <a class="nav-link active" routerLink="/doctors"><span class="nav-icon">🩺</span> Doctors</a>
+    <a class="nav-link" routerLink="/appointments"><span class="nav-icon">📅</span> Appointments</a>
+  </nav>
+  <div class="sidebar-footer">
+    <button class="logout-btn" routerLink="/login"><span>🚪</span> Logout</button>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main-content">
+  <div class="page-header">
+    <h2>🩺 Doctor Management</h2>
+    <p>Add, view and manage all hospital doctors</p>
+  </div>
+
+  <div class="alert alert-danger" *ngIf="errorMsg">⚠️ {{ errorMsg }}</div>
+  <div class="alert alert-success" *ngIf="successMsg">✅ {{ successMsg }}</div>
+
+  <!-- Add / Edit Form -->
+  <div class="card">
+    <div class="card-header">
+      <h4>{{ editMode ? '✏️ Edit Doctor' : '➕ Add New Doctor' }}</h4>
+    </div>
+    <div class="card-body">
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Full Name *</label>
+          <input class="form-control" placeholder="Dr. Priya Menon" [(ngModel)]="name">
+        </div>
+        <div class="form-group">
+          <label>Specialization *</label>
+          <input class="form-control" placeholder="e.g. Cardiology" [(ngModel)]="specialization">
+        </div>
+        <div class="form-group">
+          <label>Email *</label>
+          <input class="form-control" placeholder="doctor@hospital.com" [(ngModel)]="email">
+        </div>
+        <div class="form-group">
+          <label>Phone * (10 digits)</label>
+          <input class="form-control" placeholder="9876543210" [(ngModel)]="phone">
+        </div>
+        <div class="form-group full">
+          <label>Address</label>
+          <input class="form-control" placeholder="Clinic / Hospital address" [(ngModel)]="address">
+        </div>
+      </div>
+      <div style="display:flex; gap:10px;">
+        <button class="btn btn-success" (click)="saveDoctor()">
+          {{ editMode ? '💾 Update Doctor' : '➕ Add Doctor' }}
+        </button>
+        <button class="btn btn-danger" *ngIf="editMode" (click)="cancelEdit()">✖ Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Doctors Table -->
+  <div class="card">
+    <div class="card-header">
+      <h4>All Doctors</h4>
+      <div style="display:flex; align-items:center; gap:10px;">
+        <input
+          class="form-control"
+          style="width:220px;"
+          placeholder="🔍 Search by name or specialization..."
+          [(ngModel)]="searchQuery"
+          (input)="onSearch()">
+        <span class="badge badge-blue">{{ doctors.length }} records</span>
+      </div>
+    </div>
+
+    <div class="loading" *ngIf="loading">
+      <div class="spinner"></div>
+      Loading doctors...
+    </div>
+
+    <div class="table-wrapper" *ngIf="!loading && doctors.length > 0">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th><th>Name</th><th>Specialization</th>
+            <th>Email</th><th>Phone</th><th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let d of doctors">
+            <td style="color:var(--text-muted); font-family:'DM Mono',monospace; font-size:12px;">{{ d.id }}</td>
+            <td><strong>Dr. {{ d.name }}</strong></td>
+            <td><span class="badge badge-blue">{{ d.specialization }}</span></td>
+            <td style="color:var(--text-muted);">{{ d.email }}</td>
+            <td style="font-family:'DM Mono',monospace;">{{ d.phone }}</td>
+            <td style="display:flex; gap:6px;">
+              <button class="btn btn-primary" style="padding:6px 12px; font-size:12px;" (click)="editDoctor(d)">✏️ Edit</button>
+              <button class="btn btn-danger" (click)="deleteDoctor(d.id)">🗑 Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Pagination -->
+    <div *ngIf="!loading && totalPages > 1"
+         style="display:flex; justify-content:center; align-items:center; gap:8px; padding:16px;">
+      <button class="btn btn-primary" style="padding:6px 14px;"
+              [disabled]="currentPage === 0" (click)="goToPage(currentPage - 1)">← Prev</button>
+      <button *ngFor="let p of pages"
+              class="btn"
+              [style]="currentPage === p ? 'background:var(--blue);color:#fff;padding:6px 12px;' : 'background:#f0f4f8;color:var(--navy);padding:6px 12px;'"
+              (click)="goToPage(p)">{{ p + 1 }}</button>
+      <button class="btn btn-primary" style="padding:6px 14px;"
+              [disabled]="currentPage === totalPages - 1" (click)="goToPage(currentPage + 1)">Next →</button>
+    </div>
+
+    <div class="empty-state" *ngIf="!loading && doctors.length === 0">
+      <div class="empty-icon">🩺</div>
+      <p>No doctors found.</p>
+    </div>
+  </div>
+</div>
