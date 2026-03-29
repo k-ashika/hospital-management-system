@@ -2,6 +2,7 @@ FROM eclipse-temurin:17-jdk-alpine
 WORKDIR /app
 COPY hms-backend/.mvn/ .mvn
 COPY hms-backend/mvnw hms-backend/pom.xml ./
+RUN chmod +x mvnw
 RUN ./mvnw dependency:go-offline
 COPY hms-backend/src ./src
 RUN ./mvnw clean package -DskipTests
